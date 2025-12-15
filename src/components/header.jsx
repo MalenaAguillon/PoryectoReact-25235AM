@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Navbar, Nav, Container, Button, Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-import logo from "../assets/logo.png";
+import logo from "../assets/Logo.png";
 import { CartContext } from './CartContext';
 
 const Header = () => {
