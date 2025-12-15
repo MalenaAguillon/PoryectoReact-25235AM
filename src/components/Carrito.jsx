@@ -14,14 +14,14 @@ const Carrito = () => {
   if (carrito.length === 0) {
     return (
       <Container className="mt-4">
-        <h3>Tu carrito está vacío</h3>
+        <h3 className="main-title">Tu carrito está vacío</h3>
       </Container>
     );
   }
 
   return (
     <Container className="mt-4">
-      <h3>Carrito de compras</h3>
+      <h3 className="main-title">Carrito de compras</h3>
       <Table striped bordered hover responsive className="mt-3">
         <thead>
           <tr>
