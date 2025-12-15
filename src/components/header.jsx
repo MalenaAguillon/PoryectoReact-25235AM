@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button, Badge } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import logo from "../assets/logo.png";
+import { CartContext } from './CartContext';
 
 const Header = () => {
+  const { carrito } = useContext(CartContext);
+  const totalItems = carrito.reduce((acc, item) => acc + item.cantidad, 0);
+
   return (
-    //bg="dark" variant="dark" expand="lg" className="mb-4"
     <Navbar expand="lg" className="custom-navbar mb-4">
-      <Container>       
+      <Container>
         <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
           <img
             src={logo}
             alt="Logo"
-            //"d-inline-block align-top me-2"
             className="logo-header"
           />
           <span> Feria americana San Vicente</span>
@@ -26,12 +28,22 @@ const Header = () => {
           <Nav.Link as={Link} to="/Mujer" className="me-3">Mujer</Nav.Link>
           <Nav.Link as={Link} to="/Login" className="me-3">Login</Nav.Link>
 
-          <div className="d-flex align-items-center">
+          <div className="d-flex align-items-center position-relative">
             <Button variant="outline-light" as={Link} to="/administracion" className="me-2">
               Administración
             </Button>
-            <Link to="/carrito" className="text-white">
+
+            <Link to="/carrito" className="text-white position-relative">
               <FontAwesomeIcon icon={faShoppingCart} size="lg" />
+              {totalItems > 0 && (
+                <Badge
+                  pill
+                  bg="danger"
+                  className="position-absolute top-0 start-100 translate-middle"
+                >
+                  {totalItems}
+                </Badge>
+              )}
             </Link>
           </div>
         </Nav>

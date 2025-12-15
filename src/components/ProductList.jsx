@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext  } from 'react';
 import { Row, Col, Modal, Button } from 'react-bootstrap';
 import ProductCard from './ProductCard';
+import { CartContext } from './CartContext';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const ProductList = ({ category = null }) => {
   const [products, setProducts] = useState([]);
@@ -8,6 +12,10 @@ const ProductList = ({ category = null }) => {
   // modal para agregar al carrito
   const [showModal, setShowModal] = useState(false);
   const [productoSeleccionado, setProductoSeleccionado] = useState(null);
+
+  const { agregarAlCarrito } = useContext(CartContext);
+  const navigate = useNavigate();
+
 
 
   useEffect(() => {
@@ -30,7 +38,7 @@ const ProductList = ({ category = null }) => {
 
 
   const handleAgregarAlCarrito = (product) => {
-    //alert(`Producto ${product.title} agregado al carrito`);
+    agregarAlCarrito(product, 1); 
     setProductoSeleccionado(product);
     setShowModal(true);
   };
@@ -67,7 +75,8 @@ const ProductList = ({ category = null }) => {
           <Button className="btn-cancel" onClick={() => setShowModal(false)}>
             Seguir comprando
           </Button>
-          <Button className="btn-confirm" href="/carrito">
+          <Button className="btn-confirm" onClick={() => navigate('/carrito')}
+      >
             Ir al carrito
           </Button>
         </Modal.Footer>
